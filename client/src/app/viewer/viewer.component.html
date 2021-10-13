@@ -1,0 +1,30 @@
+<h1 style="display: flex; justify-content: center">FILE VIEWER</h1>
+<div class="child card mb-4 box-shadow">
+  <table>
+    <tr>
+      <th>File Name</th>
+      <th>File Size</th>
+      <th>Upload Date</th>
+      <th></th>
+    </tr>
+    <div *ngIf="!fileList.length; else other_content">
+      No files have been uploaded
+    </div>
+    <ng-template #other_content>
+      <tr *ngFor="let file of fileList">
+        <td>{{ file.fileName }}</td>
+        <td>{{ file.fileSize }}</td>
+        <td>{{ file.uploadTime }}</td>
+        <td>
+          <button (click)="selectedFile = file.fileName; view()">
+            Download File
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </table>
+  <div *ngIf="downloadClicked" class="card mb-4 box-shadow">
+    <h2 style="text-align: center">File Preview</h2>
+    <iframe id="viewer"></iframe>
+  </div>
+</div>
